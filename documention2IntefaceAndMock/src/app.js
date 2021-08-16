@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./app.less";
 import logo from "../public/icon.jpg";
-import json5 from "json5";
-import json2ts from 'json2ts';
+import json2ts from "json2ts";
+import { align2Selection, genMock } from "./utils";
+import ConfigPopover from "./components/ConfigPopover";
 
 const app = () => {
   const [show, setShow] = useState(false);
+
+  const ref = useRef(null);
+
+  const [selectedText, setSelectedText] = useState("");
 
   useEffect(() => {
     document.addEventListener("mouseup", mouseUp, true);
   }, []);
 
-  const mouseUp = () => {
+  const mouseUp = (e) => {
     var text = "";
     if (window.getSelection) {
       text = window.getSelection().toString();
@@ -19,10 +24,16 @@ const app = () => {
       text = document.selection.createRange().text;
     }
     if ("" != text) {
-      const res = json2ts.convert(text);
+      console.clear();
+      align2Selection(e, ref.current);
 
-      console.log(res);
+      setSelectedText(text);
     }
+  };
+
+  const handleSure = () => {
+    const res = json2ts.convert(selectedText);
+    console.log([res, genMock(selectedText)].join("\n\n"));
   };
 
   return (
@@ -53,6 +64,9 @@ const app = () => {
           open
         </div>
       )}
+      <div className="popover">
+        <ConfigPopover ref={ref} onSure={handleSure} />
+      </div>
     </>
   );
 };
