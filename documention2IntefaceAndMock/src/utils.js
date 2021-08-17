@@ -3,7 +3,7 @@ import { TypeMap, MockMap } from "./utils/constants";
 
 // 生成mock
 export const genMock = (target) => {
-  return target;
+  return "mock res " + " " + target;
 };
 
 // popover align to selector
@@ -31,11 +31,12 @@ const toLowerFirstLetter = (text) => {
   return text.charAt(0).toLowerCase() + text.slice(1);
 };
 
-const formatCharsToTypeScript = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
-  var result = JSON.stringify(jsonContent, null, "\t")
-    .replace(new RegExp('"', "g"), "")
-    .replace(new RegExp(",", "g"), "");
-  var allKeys = _.allKeys(jsonContent);
+const formatCharsToTypeScript = (jsonContent, objectName = "RootObject", optionalKeys = [], type) => {
+  let result = JSON.stringify(jsonContent, null, "\t");
+  if (type !== "mock") {
+    result = result.replace(new RegExp('"', "g"), "").replace(new RegExp(",", "g"), "");
+  }
+  let allKeys = _.allKeys(jsonContent);
   for (var index = 0, length_3 = allKeys.length; index < length_3; index++) {
     var key = allKeys[index];
     if (optionalKeys.includes(key)) {
@@ -48,12 +49,19 @@ const formatCharsToTypeScript = (jsonContent, objectName = "RootObject", optiona
 };
 
 const getInterface = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
-  return "export interface " + objectName + " " + formatCharsToTypeScript(jsonContent, objectName = "RootObject", optionalKeys = []);
-}
+  return (
+    "export interface " +
+    objectName +
+    " " +
+    formatCharsToTypeScript(jsonContent, (objectName = "RootObject"), (optionalKeys = []))
+  );
+};
 
 const getMock = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
-  return "mock res " + " " + formatCharsToTypeScript(jsonContent, objectName = "RootObject", optionalKeys = []);
-}
+  return (
+    "mock res " + " " + formatCharsToTypeScript(jsonContent, (objectName = "RootObject"), (optionalKeys = []), "mock")
+  );
+};
 
 // 解析table，生成ts类型
 export const genResultFromTable = (table) => {
