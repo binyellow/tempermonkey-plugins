@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./app.less";
-import logo from "../public/githubHeader.jpg";
 import json2ts from "json2ts";
 import { align2Selection, genMock, getClosestTable, genResultFromTable } from "./utils";
 import ConfigPopover from "./components/ConfigPopover";
@@ -40,7 +39,7 @@ const app = () => {
       const table = getClosestTable(window.getSelection().anchorNode);
 
       const { interfaces, mock } = genResultFromTable(table);
-      console.log([JSON.stringify(interfaces), JSON.stringify(mock)].join("\n\n"));
+      console.log([interfaces, mock].join("\n\n"));
     }
   };
 
@@ -72,7 +71,7 @@ const app = () => {
             target="_blank"
             href="https://github.com/binyellow/tempermonkey-plugins/tree/master/documention2IntefaceAndMock"
           >
-            <img src={logo} className="Wokoo-hide-logo" alt="logo" />
+            <img src="https://avatars.githubusercontent.com/u/29519985?v=4" className="Wokoo-hide-logo" alt="logo" />
           </a>
           heihei
         </div>

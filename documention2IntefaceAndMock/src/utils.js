@@ -27,6 +27,33 @@ export const getClosestTable = (element) => {
   } while (parent && parent.nodeType === 1 && parent.nodeType !== 9);
   return parent;
 };
+const toLowerFirstLetter = (text) => {
+  return text.charAt(0).toLowerCase() + text.slice(1);
+};
+
+const formatCharsToTypeScript = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
+  var result = JSON.stringify(jsonContent, null, "\t")
+    .replace(new RegExp('"', "g"), "")
+    .replace(new RegExp(",", "g"), "");
+  var allKeys = _.allKeys(jsonContent);
+  for (var index = 0, length_3 = allKeys.length; index < length_3; index++) {
+    var key = allKeys[index];
+    if (optionalKeys.includes(key)) {
+      result = result.replace(new RegExp(key + ":", "g"), toLowerFirstLetter(key) + "?:");
+    } else {
+      result = result.replace(new RegExp(key + ":", "g"), toLowerFirstLetter(key) + ":");
+    }
+  }
+  return result;
+};
+
+const getInterface = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
+  return "export interface " + objectName + " " + formatCharsToTypeScript(jsonContent, objectName = "RootObject", optionalKeys = []);
+}
+
+const getMock = (jsonContent, objectName = "RootObject", optionalKeys = []) => {
+  return "mock res " + " " + formatCharsToTypeScript(jsonContent, objectName = "RootObject", optionalKeys = []);
+}
 
 // 解析table，生成ts类型
 export const genResultFromTable = (table) => {
@@ -48,7 +75,7 @@ export const genResultFromTable = (table) => {
     }
   });
 
-  return { interfaces, mock };
+  return { interfaces: getInterface(interfaces), mock: getMock(mock) };
 };
 
 // 将文档的类型转成前端类型
