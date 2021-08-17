@@ -32,14 +32,8 @@ const ConfigPopover = (props, ref) => {
       <label htmlFor="interface" onClick={() => toggleChecked("interface")}>
         interface
       </label>
-      <input
-        style={{ marginLeft: 12 }}
-        id="interface"
-        type="checkbox"
-        checked={interfaceChecked}
-        onClick={() => toggleChecked("interface")}
-      />
-      <label htmlFor="mock" onClick={() => toggleChecked("mock")}>
+      <input id="interface" type="checkbox" checked={interfaceChecked} onClick={() => toggleChecked("interface")} />
+      <label style={{ marginLeft: 12 }} htmlFor="mock" onClick={() => toggleChecked("mock")}>
         mock
       </label>
       <input id="mock" type="checkbox" checked={mockChecked} onClick={() => toggleChecked("mock")} />

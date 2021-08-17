@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./app.less";
-import logo from "../public/icon.jpg";
+import logo from "../public/githubHeader.jpg";
 import json2ts from "json2ts";
-import { align2Selection, genMock } from "./utils";
+import { align2Selection, genMock, getClosestTable, genResultFromTable } from "./utils";
 import ConfigPopover from "./components/ConfigPopover";
 
 const app = () => {
@@ -26,19 +26,27 @@ const app = () => {
     if ("" != text) {
       console.clear();
       align2Selection(e, ref.current);
-
       setSelectedText(text);
     }
   };
 
   const handleSure = () => {
-    const res = json2ts.convert(selectedText);
-    console.log([res, genMock(selectedText)].join("\n\n"));
+    try {
+      const res = json2ts.convert(selectedText);
+      console.log([res, genMock(selectedText)].join("\n\n"));
+    } catch (error) {
+      console.log("error");
+
+      const table = getClosestTable(window.getSelection().anchorNode);
+
+      const { interfaces, mock } = genResultFromTable(table);
+      console.log([JSON.stringify(interfaces), JSON.stringify(mock)].join("\n\n"));
+    }
   };
 
   return (
     <>
-      {show ? (
+      {false ? (
         <div className="Wokoo">
           <header className="Wokoo-header">
             <img src={logo} className="Wokoo-logo" alt="logo" />
@@ -60,8 +68,13 @@ const app = () => {
         </div>
       ) : (
         <div className="Wokoo-hide" onClick={() => setShow(true)}>
-          <img src={logo} className="Wokoo-hide-logo" alt="logo" />
-          open
+          <a
+            target="_blank"
+            href="https://github.com/binyellow/tempermonkey-plugins/tree/master/documention2IntefaceAndMock"
+          >
+            <img src={logo} className="Wokoo-hide-logo" alt="logo" />
+          </a>
+          heihei
         </div>
       )}
       <div className="popover">
