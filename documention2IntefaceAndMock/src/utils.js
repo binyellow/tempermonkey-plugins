@@ -3,7 +3,8 @@ import { TypeMap, MockMap } from "./utils/constants";
 
 // 生成mock
 export const genMock = (target) => {
-  return "mock res " + " " + target;
+  const syntheticRes = "mock res " + " " + target;
+  return syntheticRes.replace(/"((?:(?:[^"])|(?:(?<=\\)"))*)": (.*)/g, '$1: $2');
 };
 
 // popover align to selector
@@ -35,6 +36,8 @@ const formatCharsToTypeScript = (jsonContent, objectName = "RootObject", optiona
   let result = JSON.stringify(jsonContent, null, "\t");
   if (type !== "mock") {
     result = result.replace(new RegExp('"', "g"), "").replace(new RegExp(",", "g"), "");
+  } else {
+    result = result.replace(/"((?:(?:[^"])|(?:(?<=\\)"))*)": (.*)/g, '$1: $2');
   }
   let allKeys = _.allKeys(jsonContent);
   for (var index = 0, length_3 = allKeys.length; index < length_3; index++) {
