@@ -108,7 +108,7 @@ export default class extends React.Component {
           console.log(data);
         }
       });
-    }, 1000);
+    }, 1500);
   }
 
   handleClose() {

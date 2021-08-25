@@ -1,16 +1,15 @@
 // ==UserScript==
 // @name         copy2doc
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
-// @description  try to take over the world!
+// @version      0.0.2
+// @description  copy2doc!
 // @author
-// @match        https://*/*
-// @match        http://*/*
+// @match        http://tapd.oa.com/*
 
 // ==/UserScript==
 
 ;(function () {
-  'use strict'
+  'use strict';
   if (location.href === 'http://localhost:8080/') return
   var script = document.createElement('script')
   script.src = 'http://localhost:8080/app.bundle.js'

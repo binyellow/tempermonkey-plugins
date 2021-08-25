@@ -8112,7 +8112,7 @@ var _default = /*#__PURE__*/function (_React$Component) {
             return _ref.apply(this, arguments);
           };
         }());
-      }, 1000);
+      }, 1500);
     }
   }, {
     key: "handleClose",
