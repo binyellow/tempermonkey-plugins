@@ -45,7 +45,7 @@ const app = () => {
 
   return (
     <>
-      {false ? (
+      {/* {false ? (
         <div className="Wokoo">
           <header className="Wokoo-header">
             <img src={logo} className="Wokoo-logo" alt="logo" />
@@ -75,7 +75,7 @@ const app = () => {
           </a>
           heihei
         </div>
-      )}
+      )} */}
       <div className="popover">
         <ConfigPopover ref={ref} onSure={handleSure} />
       </div>

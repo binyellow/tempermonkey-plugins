@@ -9606,19 +9606,7 @@ var app = function app() {
     }
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null,  false ? /*#__PURE__*/0 : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "Wokoo-hide",
-    onClick: function onClick() {
-      return setShow(true);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    target: "_blank",
-    href: "https://github.com/binyellow/tempermonkey-plugins/tree/master/documention2IntefaceAndMock"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: "https://avatars.githubusercontent.com/u/29519985?v=4",
-    className: "Wokoo-hide-logo",
-    alt: "logo"
-  })), "heihei"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "popover"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_ConfigPopover__WEBPACK_IMPORTED_MODULE_4__.default, {
     ref: ref,
