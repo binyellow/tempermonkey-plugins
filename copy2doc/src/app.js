@@ -101,11 +101,11 @@ export default class extends React.Component {
         for (let i = 0; i < data.items.length; i++) {
           const type = typeArr[i];
           const data = e.clipboardData.getData(type);
+
           e.clipboardData.setData(type, data.replace(
-            /([-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)?)/g,
-            ($1) => `http://tapd.oa.com${$1}`
+            /([-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)?)/gmi,
+            ($1) => `https://tapd.oa.com${$1}`
           ));
-          console.log(data);
         }
       });
     }, 1500);
